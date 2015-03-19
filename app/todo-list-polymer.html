@@ -1,0 +1,65 @@
+<script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<polymer-element name="todo-list" noscript>
+    <template>
+        <h4>You have {{ tasks.length }} tasks, {{ todo }} remaining</h4>
+
+        <div class="tasks">
+            <template repeat="{{ task, taskIndex in tasks }}">
+                <div class="task {{ task.done ? 'done' : '' }}">
+                    <span class="id">{{ taskIndex }}</span>
+                    <span>{{ task.name }}</span>
+                    <template if="{{ task.done }}">
+                        <button class="btn btn-danger pull-right btn-sm" on-click="{{ changeState }}" data-task-id="{{ taskIndex }}">
+                            <i class="fa fa-square-o"></i> Not done
+                        </button>
+                    </template>
+                    <template if="{{ !task.done }}">
+                        <button class="btn btn-success pull-right btn-sm" on-click="{{ changeState }}" data-task-id="{{ taskIndex }}">
+                            <i class="fa fa-check-square-o"></i> Done
+                        </button>
+                    </template>
+
+                    <div class="clearfix"></div>
+                </div>
+            </template>
+        </div>
+
+        <hr/>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">New Task</div>
+                <input type="text" class="form-control" id="taskName" placeholder="What to do?">
+
+                <div class="input-group-addon add-btn" on-click="{{addTask}}">
+                    Add <i class="fa fa-reply fa-rotate-90"></i>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            tasks: [
+                {name: "Devoxx France 2015", done: false},
+                {name: "Mix-IT", done: true},
+                {name: "Devoxx World 2015", done: false}
+            ],
+            get todo() {
+                return this.tasks.filter(function(t) { return !t.done }).length;
+            },
+            changeState : function(e) {
+                var _task = this.tasks[e.target.getAttribute('data-task-id')];
+                _task.done = !_task.done;
+            },
+            addTask: function() {
+                var _name = this.$.taskName.value;
+                if (_name !== '') {
+                    this.tasks.push({name: _name, done: false});
+                    this.$.taskName.value = "";
+                }
+            }
+        })
+    </script>
+</polymer-element>
