@@ -1,0 +1,98 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>Devoxx France 2015 demo</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../bower_components/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/todo-list.css">
+</head>
+<body ng-app="todoApp">
+<div class="container" ng-controller="TodoCtrl">
+    <div class="header">
+        <ul class="nav nav-pills pull-right">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <h3 class="text-muted">todo lists</h3>
+    </div>
+
+
+    <img src="images/angularjs.png" alt="AngularJS" class="logo"/>
+
+    <h4>You have {{ tasks.length }} tasks, {{ remaining() }} remaining</h4>
+
+    <div class="tasks">
+        <div class="task" ng-class="{ 'done' : task.done }" ng-repeat="task in tasks">
+            <span class="id">{{ $index }}</span>
+            <span>{{ task.name }}</span>
+            <button class="btn btn-danger pull-right btn-sm" ng-if="task.done" ng-click="changeState(task)">
+                <i class="fa fa-square-o"></i> Not done
+            </button>
+            <button class="btn btn-success pull-right btn-sm" ng-if="!task.done" ng-click="changeState(task)">
+                <i class="fa fa-check-square-o"></i> Done
+            </button>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">New Task</div>
+            <input type="text" class="form-control" id="taskName" placeholder="What to do?" ng-model="newTask">
+
+            <div class="input-group-addon add-btn" ng-click="addTask()">
+                Add <i class="fa fa-reply fa-rotate-90"></i>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="footer">
+        <p class="pull-right">Made with <span class="fa fa-heart" style="color: deeppink"></span> by <a
+            href="https://twitter.com/romaintaz">Romain</a></p>
+    </div>
+
+</div>
+
+<script src="../bower_components/angular/angular.min.js"></script>
+
+<script>
+    var app = angular.module('todoApp', []);
+    app.controller('TodoCtrl', function($scope) {
+        $scope.tasks = [
+            {name: "Devoxx France 2015", done: false},
+            {name: "Mix-IT", done: true},
+            {name: "Devoxx World 2015", done: false}
+        ];
+
+        $scope.changeState = function (task) {
+            task.done = !task.done;
+        };
+
+        $scope.remaining = function() {
+            return $scope.tasks.filter(function(t) {
+                return !t.done
+            }).length;
+        };
+
+        $scope.newTask = "";
+        $scope.addTask = function() {
+            if ($scope.newTask !== '') {
+                $scope.tasks.push({name: $scope.newTask, done: false});
+                $scope.newTask = "";
+            }
+        }
+    });
+</script>
+
+
+</body>
+</html>
