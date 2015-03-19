@@ -1,0 +1,40 @@
+.task {
+    border: solid 1px darkgray;
+    /*border-radius: 0 10px 10px 0;*/
+    margin: 2px;
+    padding: 5px;
+    font-size: 20px;
+    font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
+}
+
+.task:first-of-type {
+    border-radius: 10px 10px 0 0;
+}
+.task:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
+.task .id {
+    font-weight: bold;
+    border-right: solid 2px darkgrey;
+    padding: 5px;
+}
+
+.task.done .id {
+    color: white;
+}
+
+.task.done {
+    background: linear-gradient(to right, rgb(146, 208, 80), rgb(170, 208, 69));
+}
+
+.task.done span {
+    text-decoration: line-through;
+    color: white;
+}
+
+.add-btn {
+    background-color: #3276B1;
+    color: white;
+    cursor: pointer;
+}
