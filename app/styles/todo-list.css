@@ -25,7 +25,7 @@
 }
 
 .task.done {
-    background: linear-gradient(to right, rgb(146, 208, 80), rgb(170, 208, 69));
+  background: linear-gradient(to right, green, rgb(170, 208, 69));
 }
 
 .task.done span {
