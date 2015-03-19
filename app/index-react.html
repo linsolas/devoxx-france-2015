@@ -1,0 +1,144 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>Devoxx France 2015 demo</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../bower_components/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/todo-list.css">
+</head>
+<body ng-app="todoApp">
+<div class="container" ng-controller="TodoCtrl">
+    <div class="header">
+        <ul class="nav nav-pills pull-right">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <h3 class="text-muted">todo lists</h3>
+    </div>
+
+
+    <img src="images/react.png" alt="ReactJS" class="logo" height="64"/>
+
+    <!--<h4>You have {{ tasks.length }} tasks, {{ remaining() }} remaining</h4>-->
+
+    <div id="tasks">
+    </div>
+
+    <hr>
+
+    <div class="footer">
+        <p class="pull-right">Made with <span class="fa fa-heart" style="color: deeppink"></span> by <a
+            href="https://twitter.com/romaintaz">Romain</a></p>
+    </div>
+
+</div>
+
+<script src="../bower_components/react/react-with-addons.min.js"></script>
+<script src="../bower_components/react/JSXTransformer.js"></script>
+
+
+
+<script type="text/jsx">
+
+    var Task = React.createClass({
+        // this.props is immutable. this.state is mutable and specific to the component.
+        getInitialState: function() {
+            return {
+                done: this.props.done
+            }
+        },
+        changeState: function() {
+            this.setState({done: !this.state.done});
+        },
+
+        render: function() {
+//            console.log('Render task [%s]', this.props.title);
+            var cx = React.addons.classSet;
+            var divClasses = cx({'task': true, 'done': this.state.done });
+            var iClasses = cx({'fa fa-square-o': this.state.done, 'fa fa-check-square-o': !this.state.done});
+            var btnClasses = cx({'btn pull-right btn-sm btn-danger': this.state.done, 'btn pull-right btn-sm btn-success': !this.state.done});
+            return (
+                <div className={divClasses}>
+                    <span className="id">{ this.props.count }</span>
+                    <span>{this.props.title}</span>
+                    <button className={btnClasses} onClick={this.changeState}><i className={iClasses}></i>
+                    { this.state.done ? 'Not Done': 'Done'}
+                    </button>
+                    <div className="clearfix"></div>
+                </div>
+            );
+        }
+    });
+
+
+    var TodoApp = React.createClass({
+        tasks: [
+            {name: "Devoxx France 2015", done: false},
+            {name: "Mix-IT", done: true},
+            {name: "Devoxx World 2015", done: false}
+        ],
+        remaining: function() {
+            return this.tasks.filter(function(t) { return !t.done }).length;
+        },
+        addTask: function() {
+            var _task = this.refs.taskName.getDOMNode().value.trim();
+            if (_task) {
+                console.log('Add task "%s"', _task);
+                this.tasks.create({
+                    name: _task,
+                    done: false
+                });
+                this.refs.taskName.getDOMNode().value = '';
+            }
+        },
+
+        render: function() {
+            var _count = 0;
+            var items = this.tasks.map(function(task) {
+                _count++;
+                return (
+                    <Task count={_count} title={task.name} done={task.done}/>
+                )
+            }, this);
+
+            return (
+                <div>
+                    <h4>You have {this.tasks.length} tasks, {this.remaining()} remaining</h4>
+                    <div className="tasks">
+                    {items}
+                    </div>
+                    <hr/>
+                    <div className="form-group">
+                        <div className="input-group">
+                            <div className="input-group-addon">New Task</div>
+                            <input type="text" className="form-control" ref="taskName" placeholder="What to do?"/>
+                            <div className="input-group-addon add-btn" onClick={this.addTask}>
+                                Add <i className="fa fa-reply fa-rotate-90"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+    });
+
+    React.render(
+        <TodoApp />,
+        document.getElementById('tasks')
+    );
+
+</script>
+
+
+
+</body>
+</html>
+
+<!--
+CF https://github.com/tastejs/todomvc/tree/gh-pages/examples/react-backbone
+-->
