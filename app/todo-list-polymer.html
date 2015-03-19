@@ -1,9 +1,15 @@
+<!--
 <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
-
+-->
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<polymer-element name="todo-list" noscript>
+
+<polymer-element name="todo-list">
     <template>
-        <h4>You have {{ tasks.length }} tasks, {{ todo }} remaining</h4>
+	    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+	    <link rel="stylesheet" href="../bower_components/fontawesome/css/font-awesome.min.css">
+	    <link rel="stylesheet" href="styles/todo-list.css">
+
+	    <h4>You have {{ tasks.length }} tasks, {{ remaining }} remaining</h4>
 
         <div class="tasks">
             <template repeat="{{ task, taskIndex in tasks }}">
@@ -46,7 +52,7 @@
                 {name: "Mix-IT", done: true},
                 {name: "Devoxx World 2015", done: false}
             ],
-            get todo() {
+            get remaining() {
                 return this.tasks.filter(function(t) { return !t.done }).length;
             },
             changeState : function(e) {
