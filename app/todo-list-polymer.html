@@ -48,30 +48,39 @@
   </template>
 
   <script>
-    Polymer({
-      tasks: [
-        {name: "Devoxx France 2015", done: false},
-        {name: "Mix-IT", done: true},
-        {name: "Devoxx World 2015", done: false}
-      ],
-      get remaining() {
-        console.log('Remaining...');
-        return this.tasks.filter(function (t) {
-          return !t.done
-        }).length;
-      },
-      changeState: function (e) {
-        var _task = this.tasks[e.target.getAttribute('data-task-id')];
-        console.log('Change state of %s to %s', _task.name, !_task.done);
-        _task.done = !_task.done;
-      },
-      addTask: function () {
-        var _name = this.$.taskName.value;
-        if (_name !== '') {
-          this.tasks.push({name: _name, done: false});
-          this.$.taskName.value = "";
-        }
-      }
-    })
+      Polymer({
+          tasks: [
+              {name: "Devoxx France 2015", done: false},
+              {name: "Mix-IT", done: true},
+              {name: "Devoxx World 2015", done: false}
+          ],
+          get remaining() {
+              console.log('Remaining...');
+              return this.tasks.filter(function(t) {
+                  return !t.done
+              }).length;
+          },
+          observe: {
+              tasks: 'coucou'
+          },
+          changeState: function(e) {
+              var _task = this.tasks[e.target.getAttribute('data-task-id')];
+              console.log('Change state of %s to %s', _task.name, !_task.done);
+              _task.done = !_task.done;
+          },
+          addTask: function() {
+              var _name = this.$.taskName.value;
+              if (_name !== '') {
+                  this.tasks.push({name: _name, done: false});
+                  this.$.taskName.value = "";
+              }
+          },
+          tasksChanged: function(attr, oldVal, newVal) {
+              console.log('Changed ! %s, %s => %s', attr, oldVal, newVal);
+          },
+          coucou : function(oldVal, newVal) {
+              console.log('COUCOU %s => %s', oldVal, newVal);
+          }
+      });
   </script>
 </polymer-element>
