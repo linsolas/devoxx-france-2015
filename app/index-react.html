@@ -47,27 +47,21 @@
 
     var Task = React.createClass({
         // this.props is immutable. this.state is mutable and specific to the component.
-        getInitialState: function() {
-            return {
-                done: this.props.done
-            }
-        },
-        changeState: function() {
-            this.setState({done: !this.state.done});
-        },
-
         render: function() {
-//            console.log('Render task [%s]', this.props.title);
             var cx = React.addons.classSet;
-            var divClasses = cx({'task': true, 'done': this.state.done });
-            var iClasses = cx({'fa fa-square-o': this.state.done, 'fa fa-check-square-o': !this.state.done});
-            var btnClasses = cx({'btn pull-right btn-sm btn-danger': this.state.done, 'btn pull-right btn-sm btn-success': !this.state.done});
+            var divClasses = cx({'task': true, 'done': this.props.task.done });
+            var iClasses = cx({'fa fa-square-o': this.props.task.done, 'fa fa-check-square-o': !this.props.task.done});
+            var btnClasses = cx({
+                'btn pull-right btn-sm btn-danger': this.props.task.done,
+                'btn pull-right btn-sm btn-success': !this.props.task.done
+            });
+            var btnLabel = this.props.task.done ? 'Not Done': 'Done';
             return (
                 <div className={divClasses}>
-                    <span className="id">{ this.props.count }</span>
-                    <span>{this.props.title}</span>
-                    <button className={btnClasses} onClick={this.changeState}><i className={iClasses}></i>
-                    { this.state.done ? 'Not Done': 'Done'}
+                    <span className="id">{ this.props.index }</span>
+                    <span>{this.props.task.name}</span>
+                    <button className={btnClasses} onClick={this.props.onToggle}><i className={iClasses}></i>
+                    {btnLabel}
                     </button>
                     <div className="clearfix"></div>
                 </div>
@@ -77,40 +71,60 @@
 
 
     var TodoApp = React.createClass({
-        tasks: [
-            {name: "Devoxx France 2015", done: false},
-            {name: "Mix-IT", done: true},
-            {name: "Devoxx World 2015", done: false}
-        ],
-        remaining: function() {
-            return this.tasks.filter(function(t) { return !t.done }).length;
+        getInitialState: function() {
+            return {
+                tasks: [
+                    {name: "Devoxx France 2015", done: false},
+                    {name: "Mix-IT", done: true},
+                    {name: "Devoxx World 2015", done: false}
+                ]
+            }
         },
         addTask: function() {
-            var _task = this.refs.taskName.getDOMNode().value.trim();
+            var _node = this.refs.taskName.getDOMNode();
+            var _task = _node.value.trim();
             if (_task) {
                 console.log('Add task "%s"', _task);
-                this.tasks.create({
+                this.state.tasks.push({
                     name: _task,
                     done: false
                 });
-                this.refs.taskName.getDOMNode().value = '';
+                this.setState({
+                    tasks: this.state.tasks
+                });
+                _node.value = '';
             }
         },
 
+        toggleTask: function(task) {
+            console.log('TOGGLE %s', JSON.stringify(task));
+            task.done = !task.done;
+            this.setState({
+                tasks: this.state.tasks
+            });
+        },
+
         render: function() {
-            var _count = 0;
-            var items = this.tasks.map(function(task) {
-                _count++;
+//            var remaining = this.state.tasks.filter(function(t) { return !t.done }).length;
+            var remaining = this.state.tasks.reduce(function(count, task) {
+                return task.done ? count : count + 1;
+            }, 0);
+
+            var items = this.state.tasks.map(function(task, index) {
                 return (
-                    <Task count={_count} title={task.name} done={task.done}/>
+                    <Task key={index + 1}
+                          index={index + 1}
+                          task={task}
+                          onToggle={this.toggleTask.bind(this, task)}
+                    />
                 )
             }, this);
 
             return (
                 <div>
-                    <h4>You have {this.tasks.length} tasks, {this.remaining()} remaining</h4>
-                    <div className="tasks">
-                    {items}
+                    <h4>You have {this.state.tasks.length} tasks, {remaining} remaining</h4>
+                    <div className="tasks" ref="tasks">
+                        {items}
                     </div>
                     <hr/>
                     <div className="form-group">
