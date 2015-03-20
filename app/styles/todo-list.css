@@ -4,6 +4,8 @@
     margin: 2px;
     padding: 5px;
     font-size: 20px;
+    box-shadow: 5px 5px 4px #CCC;
+    background-color: #F8F5EC;
     font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
 }
 
@@ -31,6 +33,9 @@
 .task.done span {
     text-decoration: line-through;
     color: white;
+}
+.task.done button span {
+    text-decoration: none;
 }
 
 .add-btn {
