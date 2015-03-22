@@ -9,20 +9,25 @@
   <link rel="stylesheet" href="../bower_components/fontawesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/todo-list.css">
+
+  <script src="../bower_components/systemjs/build/system.min.js"></script>
+  <script src="scripts/config.js"></script>
 </head>
-<body>
+<body aurelia-app="todo-app">
 <div class="container">
   <div class="header">
     <ul class="nav nav-pills pull-right">
-      <li class="active"><a href="index.html">HTML</a></li>
+      <li><a href="index.html">HTML</a></li>
       <li><a href="index-angular.html">Angular</a></li>
       <li><a href="index-angular2.html">Angular 2</a></li>
       <li><a href="index-polymer.html">Polymer</a></li>
       <li><a href="index-react.html">React</a></li>
-      <li><a href="index-aurelia.html">Aurelia</a></li>
+      <li class="active"><a href="index-aurelia.html">Aurelia</a></li>
     </ul>
     <h3 class="text-muted">todo lists</h3>
   </div>
+
+  <img src="images/aurelia.png" alt="Aurelia" class="logo"/>
 
 
   <h4>You have 3 tasks, 2 remaining</h4>
@@ -62,6 +67,14 @@
       </div>
     </div>
   </div>
+
+
+  <script>
+    System.baseUrl = '';
+    System.import('aurelia-bootstrapper'); //.catch(console.error.bind(console));
+//    System.import('todo-app').catch(console.error.bind(console));
+  </script>
+
 
 
   <div class="footer">
