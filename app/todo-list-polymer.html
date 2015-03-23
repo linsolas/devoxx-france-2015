@@ -12,19 +12,18 @@
     <h4>You have {{ tasks.length }} tasks, {{ remaining }} remaining</h4>
 
     <div class="tasks">
-      <template repeat="{{ task, taskIndex in tasks }}">
-        <div class="task {{ task.done ? 'done' : '' }}">
+      <template repeat="{{ t, taskIndex in tasks }}">
+        <div class="task {{ t.done ? 'done' : '' }}">
           <span class="id">{{ taskIndex + 1 }}</span>
-          <span>{{ task.name }}</span>
-          <template if="{{ task.done }}">
-            <button class="btn btn-danger pull-right btn-sm" on-click="{{ changeState }}"
-                    data-task-id="{{ taskIndex }}">
+          <span>{{ t.name }}</span>
+
+          <template if="{{t.done}}">
+            <button class="btn btn-danger pull-right btn-sm" on-click="{{ changeState }}" data-task-id="{{ taskIndex }}">
               <i class="fa fa-square-o"></i> Not done
             </button>
           </template>
-          <template if="{{ !task.done }}">
-            <button class="btn btn-success pull-right btn-sm" on-click="{{ changeState }}"
-                    data-task-id="{{ taskIndex }}">
+          <template if="{{!t.done}}">
+            <button class="btn btn-success pull-right btn-sm" on-click="{{ changeState }}" data-task-id="{{ taskIndex }}">
               <i class="fa fa-check-square-o"></i> Done
             </button>
           </template>
@@ -60,13 +59,11 @@
                   return !t.done
               }).length;
           },
-          observe: {
-              tasks: 'coucou'
-          },
           changeState: function(e) {
-              var _task = this.tasks[e.target.getAttribute('data-task-id')];
-              console.log('Change state of %s to %s', _task.name, !_task.done);
-              _task.done = !_task.done;
+            var _id = e.target.getAttribute('data-task-id');
+            var tmp = { name: this.tasks[_id].name, done: !this.tasks[_id].done};
+            // Not the best solution, but a bug with template if with Google Chrome...
+            this.tasks[_id] = tmp;
           },
           addTask: function() {
               var _name = this.$.taskName.value;
@@ -74,12 +71,6 @@
                   this.tasks.push({name: _name, done: false});
                   this.$.taskName.value = "";
               }
-          },
-          tasksChanged: function(attr, oldVal, newVal) {
-              console.log('Changed ! %s, %s => %s', attr, oldVal, newVal);
-          },
-          coucou : function(oldVal, newVal) {
-              console.log('COUCOU %s => %s', oldVal, newVal);
           }
       });
   </script>
