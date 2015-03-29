@@ -1,35 +1,53 @@
-<style>
-    @import url(http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css);
-    @import url(http://fonts.googleapis.com/css?family=Open+Sans);
-</style>
-<style>
-    .container{
-        font-family: 'Open Sans', sans-serif;
-    }
-    .done{
-        text-decoration: line-through;
-        color : #999999;
-    }
-    .container{
-        margin-top: 200px;
-    }
-    .bottom-offset{
-        margin-bottom: 20px;
-    }
-</style>
-
 <div class="container">
-    <div class="row">
-        <div class="col-xs-4 col-xs-offset-4">
-            <div class="bottom-offset">
-                <input type="text" class="form-control" placeholder="Write something here" autofocus #newtodo (keyup)="add($event,newtodo)"/>
-            </div>
-            <h4>{{tasks.length}} tasks and {{remaining()}} remaining</h4>
-            <div *for="#todo of tasks">
-                <input type="checkbox" [checked]="todo.done" (click)="toggleTodoState(todo)"/> <span [class.done]="todo.done">{{todo.name}}</span>
-            </div>
-            <hr/>
-        </div>
-        <div class="col-xs-4"></div>
+    <!--<div class="row">-->
+        <!--<div class="col-xs-4 col-xs-offset-4">-->
+            <!--<div class="bottom-offset">-->
+                <!--<input type="text" class="form-control" placeholder="Write something here" autofocus #newtodo (keyup)="add($event,newtodo)"/>-->
+            <!--</div>-->
+            <!--<h4>{{tasks.length}} tasks and {{remaining()}} remaining</h4>-->
+            <!--<div *for="#todo of tasks">-->
+                <!--<input type="checkbox" [checked]="todo.done" (click)="toggleTodoState(todo)"/> <span [class.done]="todo.done">{{todo.name}}</span>-->
+            <!--</div>-->
+            <!--<hr/>-->
+        <!--</div>-->
+        <!--<div class="col-xs-4"></div>-->
+    <!--</div>-->
+
+
+  <h4>You have {{ tasks.length }} tasks, {{ remaining() }} remaining</h4>
+
+  <div class="tasks">
+    <div class="task" [class.done]="task.done" *for="#task of tasks">
+      <span class="id">{{ task.index }}</span>
+      <span>{{ task.name }}</span>
+      <button class="btn btn-danger pull-right btn-sm" *if="task.done" (click)="changeState(task)">
+        <i class="fa fa-square-o"></i> Not done
+      </button>
+      <button class="btn btn-success pull-right btn-sm" *if="!task.done" (click)="changeState(task)">
+        <i class="fa fa-check-square-o"></i> Done
+      </button>
+      <div class="clearfix"></div>
     </div>
+  </div>
+
+  <hr/>
+
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon">New Task</div>
+      <input type="text" class="form-control" id="taskName" placeholder="What to do?" #newtodo>
+
+      <div class="input-group-addon add-btn" (click)="add($event,newtodo)">
+        Add <i class="fa fa-reply fa-rotate-90"></i>
+      </div>
+    </div>
+  </div>
+
+
+
 </div>
+
+
+
+
+
