@@ -1,0 +1,45 @@
+.task {
+    border: solid 1px darkgray;
+    /*border-radius: 0 10px 10px 0;*/
+    margin: 10px;
+    padding: 5px;
+    font-size: 20px;
+    box-shadow: 5px 5px 4px #CCC;
+    background-color: #F8F5EC;
+    font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
+}
+
+.task:first-of-type {
+    border-radius: 10px 10px 0 0;
+}
+.task:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
+.task .id {
+    font-weight: bold;
+    border-right: solid 2px darkgrey;
+    padding: 5px;
+}
+
+.task.done .id {
+    color: white;
+}
+
+.task.done {
+  background: linear-gradient(to right, green, rgb(170, 208, 69));
+}
+
+.task.done span {
+    text-decoration: line-through;
+    color: white;
+}
+.task.done button span {
+    text-decoration: none;
+}
+
+.add-btn {
+    background-color: #3276B1;
+    color: white;
+    cursor: pointer;
+}

@@ -1,0 +1,50 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <title>Devoxx France 2015 demo</title>
+  <script src="dist/es6-shim.js"></script>
+  <meta name="viewport" content="width=device-width">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/todo-list.css">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <ul class="nav nav-pills pull-right">
+      <li class="active"><a href="index.html">HTML</a></li>
+      <li><a href="index-angular.html">Angular</a></li>
+      <li><a href="index-angular2.html">Angular 2</a></li>
+      <li><a href="index-polymer.html">Polymer</a></li>
+      <li><a href="index-react.html">React</a></li>
+      <li><a href="index-aurelia.html">Aurelia</a></li>
+    </ul>
+    <h3 class="text-muted">todo lists</h3>
+  </div>
+
+
+
+  <todo-app>Warming up...</todo-app>
+  <script>
+      System.paths = {
+          'angular2/*':'/angular2/*.js',
+          'rtts_assert/*': '/rtts_assert/*.js',
+          'services/*' : '/services/*.js',
+          'todoApp': 'TodoApp.es6'
+      };
+      System.import('todoApp');
+  </script>
+
+
+
+  <div class="footer">
+    <p class="pull-right">Made with <span class="fa fa-heart" style="color: deeppink"></span> by <a
+      href="https://twitter.com/romaintaz">Romain</a></p>
+  </div>
+
+</div>
+</body>
+</html>
