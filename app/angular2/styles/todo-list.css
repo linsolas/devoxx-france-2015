@@ -1,20 +1,15 @@
 .task {
     border: solid 1px darkgray;
     /*border-radius: 0 10px 10px 0;*/
+    border-radius: 5px;
     margin: 10px;
     padding: 5px;
     font-size: 20px;
-    box-shadow: 5px 5px 4px #CCC;
-    background-color: #F8F5EC;
+    background: none repeat scroll 0 0 #FFF;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 0, 0, 0.2) inset;
     font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
 }
 
-.task:first-of-type {
-    border-radius: 10px 10px 0 0;
-}
-.task:last-child {
-    border-radius: 0 0 10px 10px;
-}
 
 .task .id {
     font-weight: bold;
