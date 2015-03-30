@@ -11,9 +11,9 @@ class TodoApp {
 
   constructor() {
     this.tasks = [
-      {name: "Devoxx France 2015", done: false, index: 1},
-      {name: "Mix-IT", done: true, index: 2},
-      {name: "Devoxx World 2015", done: false, index: 3}
+      {name: "Devoxx France 2015", done: false},
+      {name: "Mix-IT", done: true},
+      {name: "Devoxx World 2015", done: false}
     ];
   }
 
