@@ -1,5 +1,7 @@
-Angular 2Demo execution
-=======================
+Angular 2 demo execution
+========================
+
+Use `http-server` (installation with `npm install -g http-server`) to run the application (in `./app/angular2` directory).
 
 ## index.html
 
@@ -50,8 +52,7 @@ class TodoApp {
   addTask($event, newtodo) {
     this.tasks.push({
       name: newtodo.value,
-      done: false,
-      index: this.tasks.length + 1
+      done: false
     });
     newtodo.value = '';
   }
