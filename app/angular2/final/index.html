@@ -2,7 +2,7 @@
 <html class="no-js">
 <head>
   <meta charset="utf-8">
-  <title>Devoxx France Angular 2 2015 demo</title>
+  <title>Devoxx France 2015 demo</title>
   <script src="dist/es6-shim.js"></script>
   <meta name="viewport" content="width=device-width">
   <link rel="shortcut icon" href="/favicon.ico">
@@ -28,7 +28,16 @@
   <img src="images/angularjs.png" alt="AngularJS" class="logo"/><br/>
 
 
-  <!-- Angular base -->
+  <todo-app><span><i class="fa fa-spin fa-spinner"></i> Starting application...</span></todo-app>
+
+  <script>
+      System.paths = {
+          'angular2/*':'/angular2/*.js',
+          'rtts_assert/*': '/rtts_assert/*.js',
+          'todoApp': 'TodoApp.es6'
+      };
+      System.import('todoApp');
+  </script>
 
 
 

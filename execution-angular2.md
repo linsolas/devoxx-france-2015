@@ -126,7 +126,6 @@ Add the iteration on the tasks (:1234: **ng8**):
       </button>
       <div class="clearfix"></div>
     </div>
-
 ```
 
 Finally add the new task addition button and field (:1234: **ng9**):
@@ -137,7 +136,7 @@ Finally add the new task addition button and field (:1234: **ng9**):
       <div class="input-group-addon add-btn" (click)="addTask($event,newtodo)">
         Add <i class="fa fa-reply fa-rotate-90"></i>
       </div>
-``
+```
 
 Test :smirk:
 
