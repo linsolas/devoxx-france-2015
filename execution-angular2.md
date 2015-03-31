@@ -3,7 +3,7 @@ Angular 2Demo execution
 
 ## index.html
 
-In main page:
+In main page, we add the default Angular 2 files (:1234: **ng1**):
 
 ```html
   <todo-app><span><i class="fa fa-spin fa-spinner"></i> Starting application...</span></todo-app>
@@ -17,18 +17,18 @@ In main page:
       System.import('todoApp');
   </script>
 ```
-:1234: **ng1**
 
 `System` is used to load Angular 2 libraries and my application.
+
 
 ## TodoApp.es6
 
 Extension is `.es6` for ECMAScript 6, but can be JavaScript too.
 
-We start with the import : `import {Component, Template, bootstrap, For, If} from 'angular2/angular2';`
-:1234: **ng2**
+We start with the import (:1234: **ng2**) : `import {Component, Template, bootstrap, For, If} from 'angular2/angular2';`
 
-We create a `class TodoApp` with a basic constructor`:
+
+We create a `class TodoApp` with a basic `constructor` (:1234: **ng3**):
 
 ```javascript
 class TodoApp {
@@ -63,19 +63,17 @@ class TodoApp {
 
 bootstrap(TodoApp);
 ```
-:1234: **ng3**
 
 Now, we add **annotations**.
-First, a `@Component` to indicate that we are dealing with the `<todo-app>` tag.
+First, a `@Component` to indicate that we are dealing with the `<todo-app>` tag (:1234: **ng4**):
 
 ```
 @Component({
   selector: 'todo-app'
 })
 ```
-:1234: **ng4**
 
-Then a `@Template` to indicate that there is an external template for the component:
+Then a `@Template` to indicate that there is an external template for the component (:1234: **ng5**):
 
 ```
 @Template({
@@ -83,11 +81,10 @@ Then a `@Template` to indicate that there is an external template for the compon
   directives: [For, If]
 })
 ```
-:1234: **ng5**
 
 ## template/todo.html
 
-Structure of the template: :1234: **ng6**
+We start with the skeleton of the template (:1234: **ng6**):
 
 ```
 <div class="container">
@@ -109,13 +106,13 @@ Structure of the template: :1234: **ng6**
 </div>
 ```
 
-Add the counter :1234: **ng7**
+Add the counter (:1234: **ng7**):
 
 ```
   <h4>You have {{ tasks.length }} tasks, {{ remaining() }} remaining</h4>
 ```
 
-Add the iteration on the tasks :1234: **ng8**
+Add the iteration on the tasks (:1234: **ng8**):
 
 ```
     <div class="task" [class.done]="task.done" *for="#task of tasks #i=index">
@@ -132,7 +129,7 @@ Add the iteration on the tasks :1234: **ng8**
 
 ```
 
-Finally add the new task addition button and field :1234: **ng9**
+Finally add the new task addition button and field (:1234: **ng9**):
 
 ```
       <input type="text" class="form-control" id="taskName" placeholder="What to do?" #newtodo>
