@@ -24,14 +24,6 @@ Create skeleton of the application (:1234: **wc1**):
   
   <script>
       Polymer({
-        // JS code goes here...
-      });
-  </script>
-</polymer-element>
-```
-
-Add basic data in JS (:1234: **wc2**):
-```javascript
           tasks: [
               {name: "Devoxx France 2015", done: false},
               {name: "Mix-IT", done: true},
@@ -42,9 +34,13 @@ Add basic data in JS (:1234: **wc2**):
                   return !t.done
               }).length;
           }
+      });
+  </script>
+</polymer-element>
 ```
 
-Add default HTML code (:1234: **wc3**):
+
+Add default HTML code (:1234: **wc2**):
 
 ```html
     <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.css">
@@ -68,7 +64,7 @@ Add default HTML code (:1234: **wc3**):
     </div>
 ```
 
-Iterate on the tasks (:1234: **wc4**):
+Iterate on the tasks (:1234: **wc3**):
 
 ```html
       <template repeat="{{ t, taskIndex in tasks }}">
@@ -83,7 +79,7 @@ Iterate on the tasks (:1234: **wc4**):
       </template>
 ```
 
-Add buttons to close / open a task (:1234: **wc5**):
+Add buttons to close / open a task (:1234: **wc4**):
 
 ```
           <template if="{{t.done}}">
@@ -98,17 +94,17 @@ Add buttons to close / open a task (:1234: **wc5**):
           </template>
 ```
 
-and the JS code (:1234: **wc6**):
+and the JS code (:1234: **wc5**):
 ```javascript
           changeState: function(e) {
             var _id = e.target.getAttribute('data-task-id');
             var tmp = { name: this.tasks[_id].name, done: !this.tasks[_id].done};
             // Not the best solution, but a bug with template if with Google Chrome...
             this.tasks[_id] = tmp;
-          },
+          }
 ```
 
-Finally the "Add task" button (:1234: **wc7**):
+Finally the "Add task" button (:1234: **wc6**):
 
 ```
         <div class="input-group-addon add-btn" on-click="{{addTask}}">
@@ -116,7 +112,7 @@ Finally the "Add task" button (:1234: **wc7**):
         </div>
 ```
 
-and the corresponding action (:1234: **wc8**):
+and the corresponding action (:1234: **wc7**):
 
 ```javascript
           addTask: function() {
