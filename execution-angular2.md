@@ -117,7 +117,7 @@ Add the iteration on the tasks (:1234: **ng8**):
 
 ```
     <div class="task" [class.done]="task.done" *for="#task of tasks #i=index">
-      <span class="id">{{ i }}</span>
+      <span class="id">{{ i + 1 }}</span>
       <span>{{ task.name }}</span>
       <button class="btn btn-danger pull-right btn-sm" *if="task.done" (click)="changeState(task)">
         <i class="fa fa-square-o"></i> Not done
