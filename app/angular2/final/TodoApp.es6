@@ -21,8 +21,7 @@ class TodoApp {
     console.log('Adding "%s"', newtodo.value);
     this.tasks.push({
       name: newtodo.value,
-      done: false,
-      index: this.tasks.length + 1
+      done: false
     });
     newtodo.value = '';
   }
