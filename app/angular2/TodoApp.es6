@@ -17,7 +17,7 @@ class TodoApp {
     ];
   }
 
-  add($event, newtodo) {
+  addTask($event, newtodo) {
     console.log('Adding "%s"', newtodo.value);
     this.tasks.push({
       name: newtodo.value,
