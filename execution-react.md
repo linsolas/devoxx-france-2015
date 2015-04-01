@@ -6,10 +6,6 @@ Include the code for the React application in a `<script type="text/jsx">` block
 Create the skeleton (:1234: **rea1**):
 
 ```javascript
-var Task = React.createClass({
-    // Code for TASK object
-});
-
 var TodoApp = React.createClass({
     // Code for the APPLICATION
 });
@@ -108,28 +104,23 @@ Now we need to create the `Task` element (:1234: **rea5**):
 
 ```javascript
 var Task = React.createClass({
+    // this.props is immutable. this.state is mutable and specific to the component.
+    render: function () {
+        var cx = React.addons.classSet;
+        var divClasses = cx({'task': true, 'done': this.props.task.done});
+        var iClasses = cx({'fa fa-square-o': this.props.task.done, 'fa fa-check-square-o': !this.props.task.done});
+        var btnClasses = cx({
+            'btn pull-right btn-sm btn-danger': this.props.task.done,
+            'btn pull-right btn-sm btn-success': !this.props.task.done
+        });
+        var btnLabel = this.props.task.done ? 'Not Done' : 'Done';
+        // JSX part goes here
+    }
     // Code goes here...
 });
 ```
 
-Finally, add the following code (:1234: **rea6**):
-
-```javascript
-// this.props is immutable. this.state is mutable and specific to the component.
-render: function () {
-    var cx = React.addons.classSet;
-    var divClasses = cx({'task': true, 'done': this.props.task.done});
-    var iClasses = cx({'fa fa-square-o': this.props.task.done, 'fa fa-check-square-o': !this.props.task.done});
-    var btnClasses = cx({
-        'btn pull-right btn-sm btn-danger': this.props.task.done,
-        'btn pull-right btn-sm btn-success': !this.props.task.done
-    });
-    var btnLabel = this.props.task.done ? 'Not Done' : 'Done';
-    // JSX part goes here
-}
-```
-
-And the JSX part (:1234: **rea7**):
+And the JSX part (:1234: **rea6**):
 
 ```javascript
 return (
