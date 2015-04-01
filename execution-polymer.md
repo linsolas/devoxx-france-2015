@@ -98,9 +98,12 @@ and the JS code (:1234: **wc5**):
 ```javascript
           changeState: function(e) {
             var _id = e.target.getAttribute('data-task-id');
-            var tmp = { name: this.tasks[_id].name, done: !this.tasks[_id].done};
-            // Not the best solution, but a bug with template if with Google Chrome...
-            this.tasks[_id] = tmp;
+            this.tasks[_id].done = !this.tasks[_id].done;
+            // By default, the Object.observe does not work on property modification of an object inside an array...
+            Object.getNotifier(this.tasks).notify({
+              type: 'update',
+              name: '0'
+            });
           }
 ```
 
