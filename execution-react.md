@@ -29,7 +29,7 @@ getInitialState: function () {
           {name: "Devoxx World 2015", done: false}
         ]
     }
-}
+},
 
 addTask: function () {
     var _node = this.refs.taskName.getDOMNode();
