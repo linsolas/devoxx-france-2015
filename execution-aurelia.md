@@ -46,6 +46,7 @@ export class Todos {
     // Add task
 
 }
+```
 
 For easier use, we will use a `class` called `TodoItem`. So we need to import it (:1234: **or2**):
 
