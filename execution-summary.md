@@ -92,7 +92,7 @@ Files `www/js/controllers.js` and `www/templates/tab-dash.html`
 
 **Steps**
 
-* In `In src/todos.js`:
+* In `src/todos.js`:
  * `or1` **JS** Todo skeleton
  * `or2` **JS** import
  * `or3` **JS** use of TodoItem
