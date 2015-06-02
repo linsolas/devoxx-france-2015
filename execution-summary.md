@@ -32,7 +32,7 @@
 **Steps**
 
 * In `index.html`:
-  * `ng1` **HTML** <todo-app> and <script>
+  * `ng1` **HTML** `<todo-app>` and `<script>`
 * In `TodoApp.es6`:
   * `ng2` **JS** import
   * `ng3` **JS** class TodoApp
